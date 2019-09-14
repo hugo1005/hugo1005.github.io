@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<head>
+    <style>
+        body {
+            background: black;
+        }
+
+        h1 {
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: lighter;
+            margin-bottom: 0;
+            padding-bottom: 0;
+            font-size: 16pt;
+        }
+
+        h2 {
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: lighter;
+            font-style: italic;
+
+            margin-top: 0;
+            padding-top: 0;
+            font-size: 10pt;
+        }
+
+        p {
+            color: white;
+        }
+
+        .logo-container {
+            width: 100%;
+            height: 120px;
+            margin-top: 20px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-container img {
+            height: 60px;
+            float: left;
+        }
+
+        .logo-container h1 {
+            height: 60px;
+
+        }
+
+        .button-container {
+            width: 100%;
+            display:flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .button-wide {
+            width: 95vw;
+            height: 10vh;
+            margin: 10px;
+
+            border-radius: 10px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 20pt;
+        }
+
+    </style>
+</head>
+<body> 
+    <div class="logo-container">
+        <img src='./assets/I&E_white.png'>
+        <h1>Headcount Suvey Results</h1>
+    </div>
+    <div class="button-container">
+        <p id='results'></p>
+        <button class='button-wide' onclick="reset()">RESET</button>
+    </div>
+
+    <script>
+        document.getElementById('results').innerHTML = localStorage.getItem('headcount')
+
+        function reset() {
+            localStorage.clear()
+            document.getElementById('results').innerHTML = localStorage.getItem('headcount')
+        }
+    </script>
+</body>
+</html>

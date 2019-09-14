@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<head>
+    <style>
+        body {
+            background: black;
+        }
+
+        h1 {
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: lighter;
+            margin-bottom: 0;
+            padding-bottom: 0;
+            font-size: 16pt;
+        }
+
+        h2 {
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: lighter;
+            font-style: italic;
+
+            margin-top: 0;
+            padding-top: 0;
+            font-size: 10pt;
+        }
+
+        .logo-container {
+            width: 100%;
+            height: 120px;
+            margin-top: 20px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-container img {
+            height: 60px;
+            float: left;
+        }
+
+        .logo-container h1 {
+            height: 60px;
+
+        }
+
+        .button-container {
+            width: 100%;
+            display:flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .button-wide {
+            width: 95vw;
+            height: 10vh;
+            margin: 10px;
+
+            border-radius: 10px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 20pt;
+        }
+
+        .flash-button {
+            background:lime;
+            padding:5px 10px;
+            color:#fff;
+            border:none;
+            border-radius:5px;
+            
+            animation-name: flash;
+            animation-duration: 1s;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+
+            -webkit-animation-name: flash;
+            -webkit-animation-duration: 1s;
+            -webkit-animation-timing-function: linear;
+            -webkit-animation-iteration-count: infinite;
+
+
+            -moz-animation-name: flash;
+            -moz-animation-duration: 1s;
+            -moz-animation-timing-function: linear;
+            -moz-animation-iteration-count: infinite;
+        }
+
+        @keyframes flash {  
+            0% { opacity: 1.0; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1.0; }
+        }
+
+        @-webkit-keyframes flash {  
+            0% { opacity: 1.0; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1.0; }
+        }
+
+        @-moz-keyframes flash {  
+            0% { opacity: 1.0; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1.0; }
+        }
+    </style>
+</head>
+<body> 
+    <div class="logo-container">
+        <img src='./assets/I&E_white.png'>
+        <h1>Headcount Suvey</h1>
+        <h2>Tap your course below:</h1>
+    </div>
+    <div class="button-container">
+        <button class='button-wide' onclick="counter(this)">Econ & Finance</button>
+        <button class='button-wide' onclick="counter(this)">BComm</button>
+        <button class='button-wide' onclick="counter(this)">Maths / Physics</button>  
+        <button class='button-wide' onclick="counter(this)">Engineering</button>
+        <button class='button-wide' onclick="counter(this)">Economics</button>  
+        <button class='button-wide' onclick="counter(this)">Other</button>  
+    </div>
+
+    <script>
+        if (localStorage.getItem('headcount') == null) {
+            localStorage.setItem('headcount', JSON.stringify({
+                'Econ &amp; Finance': 0,
+                'BComm': 0,
+                'Maths / Physics': 0,
+                'Engineering': 0,
+                'Economics': 0,
+                'Other': 0
+            }))
+        }
+
+        var headcount = JSON.parse(localStorage.getItem('headcount'))
+        
+
+        function counter(btn) {
+            headcount[btn.innerHTML] = headcount[btn.innerHTML] + 1
+            localStorage.setItem('headcount', JSON.stringify(headcount))
+            btn.classList.add('flash-button')
+            new Promise((resolve) => setTimeout(resolve,1300)).then(() => btn.classList.remove('flash-button'))
+
+            console.log(JSON.stringify(headcount))
+        }
+    </script>
+</body>
+</html>
